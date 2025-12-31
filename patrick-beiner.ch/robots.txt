@@ -1,0 +1,14 @@
+# robots.txt pour patrick-beiner.ch
+# Derniere mise a jour: Decembre 2025
+
+User-agent: *
+Allow: /
+
+# Pages a ne pas indexer
+Disallow: /mentions-legales.html
+Disallow: /politique-confidentialite.html
+Disallow: /css/
+Disallow: /js/
+
+# Sitemap (a creer et ajouter l'URL complete une fois le site en ligne)
+# Sitemap: https://www.votre-domaine.ch/sitemap.xml

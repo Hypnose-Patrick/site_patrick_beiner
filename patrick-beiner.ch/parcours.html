@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diagnostic I.C.A.R.E. - Découvrez votre archétype héroïque et identifiez vos blocages professionnels en 15 questions.">
+    <title>Diagnostic I.C.A.R.E. | Patrick Beiner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        patrick: {
+                            green: '#244A32',
+                            lightGreen: '#3A6348',
+                            bronze: '#c4a052',
+                            bronzeHover: '#d4b86a',
+                            cream: '#F9F7F2'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #244A32;
+            color: #F9F7F2;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .hidden-screen { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-transition { transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        .option-card:hover .option-indicator {
+            background-color: #c4a052;
+            border-color: #c4a052;
+        }
+
+        input[type="checkbox"] {
+            accent-color: #c4a052;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="images/logo-patrick-beiner.png">
+</head>
+<body class="min-h-screen bg-patrick-green selection:bg-patrick-bronze selection:text-white overflow-x-hidden">
+
+    <!-- Fond texturé subtil -->
+    <div class="fixed inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none"></div>
+
+    <div class="relative z-10 min-h-screen flex flex-col justify-center items-center p-4 md:p-8">
+
+        <!-- ÉCRAN 1 : ACCUEIL -->
+        <div id="screen-intro" class="w-full max-w-3xl text-center fade-in py-10">
+            <p class="text-patrick-bronze tracking-[0.2em] uppercase text-xs font-bold mb-4">Coach en Réinsertion • Expert PNL • Hypnothérapeute</p>
+
+            <h1 class="text-5xl md:text-7xl font-serif font-medium mb-8 leading-tight text-white">
+                LIBÉREZ LE <span class="text-patrick-bronze italic">HÉROS</span> DE <br>VOTRE CARRIÈRE
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-2xl mx-auto font-light">
+                L'hypnose libère vos blocages invisibles. La stratégie construit votre chemin.<br>
+                Découvrez en 15 questions où vous en êtes vraiment dans votre Voyage.
+            </p>
+
+            <button onclick="startQuiz()" class="bg-patrick-bronze hover:bg-patrick-bronzeHover text-white font-bold py-4 px-10 rounded-lg shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl flex items-center gap-3 mx-auto text-lg tracking-wide">
+                <span>DÉMARRER LE DIAGNOSTIC</span> <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+
+            <div class="mt-8 flex justify-center gap-6 text-xs text-patrick-bronze/80 uppercase tracking-widest">
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> 3 Minutes</span>
+                <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4"></i> Gratuit & Privé</span>
+            </div>
+
+            <!-- Lien retour -->
+            <div class="mt-12">
+                <a href="index.html" class="text-patrick-bronze/60 hover:text-patrick-bronze text-sm flex items-center gap-2 justify-center transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Retour à l'accueil
+                </a>
+            </div>
+        </div>
+
+        <!-- ÉCRAN 2 : QUIZ -->
+        <div id="screen-quiz" class="w-full max-w-2xl hidden-screen fade-in">
+            <div class="mb-8">
+                <div class="flex justify-between items-end mb-3">
+                    <span class="text-patrick-bronze text-sm font-bold tracking-widest uppercase" id="question-category">ENVIRONNEMENT</span>
+                    <span class="text-gray-400 text-xs font-mono" id="question-counter">01 / 15</span>
+                </div>
+                <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-patrick-bronze progress-transition shadow-[0_0_10px_rgba(196,157,82,0.5)]" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="bg-patrick-lightGreen/30 backdrop-blur-md p-8 md:p-10 rounded-2xl border border-white/5 shadow-2xl">
+                <h2 id="question-text" class="text-2xl md:text-3xl font-serif mb-10 text-white leading-snug"></h2>
+
+                <div id="options-container" class="space-y-4"></div>
+            </div>
+        </div>
+
+        <!-- ÉCRAN 3 : ANALYSE -->
+        <div id="screen-analyzing" class="w-full max-w-lg text-center hidden-screen">
+            <div class="mb-8 relative inline-flex justify-center items-center">
+                <div class="absolute inset-0 bg-patrick-bronze/20 rounded-full blur-xl animate-pulse"></div>
+                <i data-lucide="hourglass" class="text-patrick-bronze w-16 h-16 relative z-10 animate-spin-slow" style="animation-duration: 3s;"></i>
+            </div>
+            <h2 class="text-3xl font-serif text-white mb-4">Analyse de votre Parcours...</h2>
+            <p class="text-gray-300 font-light mb-8">Nous connectons vos réponses aux archétypes du Voyage.</p>
+
+            <div class="w-full bg-white/10 rounded-full h-1 mb-4 overflow-hidden">
+                <div class="h-full bg-patrick-bronze animate-[width_3s_ease-out_forwards]" style="width: 0%; animation-name: loadProgress;"></div>
+            </div>
+
+            <div class="space-y-2 text-sm text-patrick-bronze text-left w-64 mx-auto opacity-80">
+                <div class="flex items-center gap-3 fade-in" style="animation-delay: 0.5s"><i data-lucide="check" class="w-4 h-4"></i> Niveaux Logiques de Dilts</div>
+                <div class="flex items-center gap-3 fade-in" style="animation-delay: 1.2s"><i data-lucide="check" class="w-4 h-4"></i> Cartographie de l'Ombre</div>
+                <div class="flex items-center gap-3 fade-in" style="animation-delay: 2.0s"><i data-lucide="check" class="w-4 h-4"></i> Définition de la Quête</div>
+            </div>
+        </div>
+
+        <!-- ÉCRAN 4 : CAPTURE EMAIL -->
+        <div id="screen-capture" class="w-full max-w-lg hidden-screen fade-in">
+            <div class="bg-patrick-lightGreen/40 backdrop-blur-md p-8 md:p-12 rounded-xl border border-patrick-bronze/30 shadow-2xl text-center">
+                <i data-lucide="lock" class="text-patrick-bronze w-10 h-10 mx-auto mb-6"></i>
+
+                <h2 class="text-3xl font-serif text-white mb-2">Votre Profil est prêt</h2>
+                <p class="text-gray-300 mb-8 font-light text-sm">Pour protéger la confidentialité de votre analyse, les résultats détaillés vous sont envoyés personnellement.</p>
+
+                <div class="bg-[#244A32] rounded-lg p-5 mb-8 text-left border-l-4 border-patrick-bronze shadow-inner">
+                    <p class="text-patrick-bronze text-xs font-bold uppercase tracking-widest mb-3">INCLUS DANS VOTRE ENVOI :</p>
+                    <ul class="space-y-2 text-sm text-gray-200">
+                        <li class="flex gap-2"><i data-lucide="check-circle-2" class="text-patrick-bronze w-4 h-4 flex-shrink-0"></i> <span>Votre <strong>Archétype Héroïque</strong> dominant</span></li>
+                        <li class="flex gap-2"><i data-lucide="check-circle-2" class="text-patrick-bronze w-4 h-4 flex-shrink-0"></i> <span><strong>3 Exercices d'Auto-Coaching</strong> (PDF)</span></li>
+                        <li class="flex gap-2"><i data-lucide="check-circle-2" class="text-patrick-bronze w-4 h-4 flex-shrink-0"></i> <span>La Carte de vos 6 Niveaux Logiques</span></li>
+                    </ul>
+                </div>
+
+                <form onsubmit="submitForm(event)" id="leadForm" class="space-y-4">
+                    <input type="hidden" id="user-score" name="score">
+                    <input type="hidden" id="user-profile" name="profile">
+                    <input type="hidden" id="user-answers" name="answers">
+
+                    <div class="relative">
+                        <i data-lucide="user" class="absolute left-4 top-3.5 text-gray-400 w-5 h-5"></i>
+                        <input type="text" id="user-name" name="name" required class="w-full bg-white/5 border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-patrick-bronze focus:bg-white/10 transition-colors" placeholder="Votre Prénom">
+                    </div>
+                    <div class="relative">
+                        <i data-lucide="mail" class="absolute left-4 top-3.5 text-gray-400 w-5 h-5"></i>
+                        <input type="email" id="user-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-patrick-bronze focus:bg-white/10 transition-colors" placeholder="Votre Email Professionnel">
+                    </div>
+
+                    <div class="space-y-3 mt-4 text-left border-t border-white/10 pt-4">
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" name="consent_required" required class="mt-1 w-4 h-4 cursor-pointer accent-patrick-bronze">
+                            <span class="text-xs text-gray-400 group-hover:text-gray-200 leading-tight">
+                                J'accepte la <a href="politique-confidentialite.html" target="_blank" class="underline">politique de confidentialité</a> et le traitement de mes résultats.
+                            </span>
+                        </label>
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" id="optin-newsletter" name="optin_newsletter" class="mt-1 w-4 h-4 cursor-pointer accent-patrick-bronze">
+                            <span class="text-xs text-gray-400 group-hover:text-gray-200 leading-tight">
+                                Je souhaite recevoir des conseils par email (Désinscription possible).
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full bg-patrick-bronze hover:bg-patrick-bronzeHover text-white font-bold py-4 rounded-lg shadow-lg mt-6 transition-all flex justify-center items-center gap-2">
+                        <span>RÉVÉLER MON PROFIL</span> <i data-lucide="unlock" class="w-4 h-4"></i>
+                    </button>
+
+                    <p class="text-[10px] text-gray-500 mt-4 uppercase tracking-wider">
+                        Données confidentielles • Conforme nLPD / RGPD
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- ÉCRAN 5 : RÉSULTATS -->
+        <div id="screen-result" class="w-full max-w-4xl hidden-screen fade-in pb-16">
+
+            <div class="bg-patrick-bronze/10 border border-patrick-bronze/30 rounded-lg p-4 mb-12 flex items-start gap-4 max-w-2xl mx-auto">
+                <i data-lucide="send" class="text-patrick-bronze w-6 h-6 mt-1 flex-shrink-0"></i>
+                <div>
+                    <h4 class="text-patrick-bronze font-bold text-sm uppercase">Dossier Envoyé !</h4>
+                    <p class="text-gray-300 text-sm mt-1">L'analyse complète et vos exercices ont été envoyés à <span id="display-email" class="text-white font-medium">email</span>. Regardez dans vos spams si nécessaire.</p>
+                </div>
+            </div>
+
+            <div class="text-center mb-12">
+                <p class="text-patrick-bronze text-sm font-bold tracking-[0.3em] uppercase mb-4">Votre Archétype Actuel</p>
+                <h1 id="result-title" class="text-4xl md:text-6xl font-serif text-white mb-6">Titre Profil</h1>
+                <div class="w-24 h-1 bg-patrick-bronze mx-auto mb-8"></div>
+
+                <div class="inline-flex items-center gap-4 bg-white/5 rounded-full px-6 py-2 border border-white/10">
+                    <span class="text-gray-400 text-sm uppercase tracking-wider">Alignement Héroïque</span>
+                    <span id="result-score" class="text-patrick-bronze font-bold text-xl font-serif">0%</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-patrick-lightGreen/20 p-8 rounded-xl border-l-2 border-patrick-bronze">
+                    <h3 class="font-serif text-2xl text-white mb-4 flex items-center gap-3">
+                        <i data-lucide="map-pin" class="text-patrick-bronze"></i> Où vous en êtes
+                    </h3>
+                    <p id="result-desc" class="text-gray-300 leading-relaxed font-light">Description...</p>
+                </div>
+
+                <div class="bg-patrick-lightGreen/40 p-8 rounded-xl border border-white/5">
+                    <h3 class="font-serif text-2xl text-white mb-4 flex items-center gap-3">
+                        <i data-lucide="compass" class="text-patrick-bronze"></i> Votre Cap
+                    </h3>
+                    <p class="text-gray-300 mb-6 font-light">
+                        Pour avancer, votre structure recommandée est le <strong id="result-path" class="text-white font-medium">Parcours...</strong>.
+                    </p>
+                    <div class="bg-[#244A32] p-4 rounded border border-white/10">
+                        <p class="text-xs text-patrick-bronze font-bold uppercase mb-2">ACTION IMMÉDIATE :</p>
+                        <ul class="text-sm text-gray-300 space-y-2">
+                            <li class="flex gap-2"><i data-lucide="arrow-right-circle" class="w-4 h-4 text-patrick-bronze"></i> Ouvrir l'exercice PDF (reçu par mail)</li>
+                            <li class="flex gap-2"><i data-lucide="arrow-right-circle" class="w-4 h-4 text-patrick-bronze"></i> Réserver votre appel découverte</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-gray-400 mb-6 italic font-serif text-lg">"Le privilège d'une vie est de devenir qui vous êtes vraiment." — C.G. Jung</p>
+                <a href="contact.html" id="result-cta" class="inline-flex bg-patrick-bronze hover:bg-patrick-bronzeHover text-white font-bold py-5 px-12 rounded-lg shadow-xl hover:shadow-2xl transition-all items-center gap-3 text-lg">
+                    Réserver mon Appel Découverte <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/diagnostic.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

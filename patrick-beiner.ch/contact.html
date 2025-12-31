@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez Patrick Beiner pour une consultation en hypnose ou coaching. Cabinet à Choex (Monthey) ou consultations en ligne disponibles.">
+    <title>Contact | Patrick Beiner</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo-patrick-beiner.png">
+</head>
+<body>
+    <div class="top-bar">BIENVENUE</div>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo"><img src="images/logo-patrick-beiner.png" alt="Logo"></a>
+            <nav class="nav-desktop">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html" style="border-bottom:2px solid var(--color-green-dark)">Contact</a></li>
+                    <li><a href="formations.html">Formations</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="parcours.html">Parcours</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+        </div>
+        <nav class="nav-mobile"><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li><li><a href="formations.html">Formations</a></li><li><a href="blog.html">Blog</a></li><li><a href="parcours.html">Parcours</a></li></ul></nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section style="background:linear-gradient(135deg,#4a6fa5 0%,#2d4a6f 100%);padding:6rem 2rem;text-align:center;color:#fff">
+        <h1 style="font-size:2.25rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:3px">CONTACTEZ-MOI</h1>
+        <p style="margin-bottom:2rem">Prenez rendez-vous pour un accompagnement personnalise.</p>
+        <div style="background:#fff;max-width:500px;margin:0 auto;padding:3rem;border-radius:16px;box-shadow:0 20px 25px rgba(0,0,0,.15)">
+            <!-- Messages de succes/erreur -->
+            <div id="form-message" style="margin-bottom: 1.5rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+
+            <form action="contact-form.php" method="POST" id="contactForm">
+                <!-- Honeypot anti-spam (invisible) -->
+                <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+
+                <div style="margin-bottom:1.5rem;text-align:left">
+                    <label style="display:block;font-size:.875rem;color:#343a40;margin-bottom:.25rem">Votre prenom*</label>
+                    <input type="text" name="prenom" placeholder="Entrez votre prenom" style="width:100%;padding:1rem;border:1px solid #e9ecef;border-radius:8px;font-family:var(--font-secondary);font-size:1rem" required>
+                </div>
+                <div style="margin-bottom:1.5rem;text-align:left">
+                    <label style="display:block;font-size:.875rem;color:#343a40;margin-bottom:.25rem">Votre email*</label>
+                    <input type="email" name="email" placeholder="Entrez votre email" style="width:100%;padding:1rem;border:1px solid #e9ecef;border-radius:8px;font-family:var(--font-secondary);font-size:1rem" required>
+                </div>
+                <div style="margin-bottom:1.5rem;text-align:left">
+                    <label style="display:block;font-size:.875rem;color:#343a40;margin-bottom:.25rem">Votre message*</label>
+                    <textarea name="message" placeholder="Ecrivez votre message" style="width:100%;padding:1rem;border:1px solid #e9ecef;border-radius:8px;font-family:var(--font-secondary);font-size:1rem;min-height:120px;resize:vertical" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-green" style="width:100%">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section style="padding:6rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1400px;margin:0 auto">
+        <div>
+            <h2 style="font-size:1.875rem;margin-bottom:1.5rem">Ou me trouver</h2>
+            <p style="color:#6c757d;margin-bottom:1rem">Mon cabinet est facile d'acces pour vos seances d'hypnose et coaching.<br>Parking assure</p>
+            <div>
+                <h4 style="font-size:1rem;margin-bottom:.5rem;margin-top:2rem">Adresse</h4>
+                <p style="color:#343a40">Route du Grand clos 46<br>1871 Choex</p>
+                <h4 style="font-size:1rem;margin-bottom:.5rem;margin-top:2rem">Horaires</h4>
+                <p style="color:#343a40">Lun-Ven 17h-20h<br>Samedi 9h-16h</p>
+            </div>
+        </div>
+        <div style="border-radius:16px;overflow:hidden;height:300px;background:#e9ecef;display:flex;align-items:center;justify-content:center">
+            <p style="color:#6c757d">Carte Google Maps<br>(a integrer)</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:4rem 2rem;text-align:center;background:#244a32;color:white">
+        <h2 style="color:white">Preferez-vous reserver directement ?</h2>
+        <p style="opacity:.9;max-width:600px;margin:1rem auto 2rem">Choisissez un creneau qui vous convient pour votre premiere seance ou votre appel decouverte gratuit.</p>
+        <a href="tel:0764902312" class="btn btn-gold">076 490 23 12</a>
+        <p style="margin-top:1rem;font-size:.875rem;opacity:.7">SMS uniquement</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand"><h4>Patrick Beiner</h4><p>Hypnose et Coaching Professionnel</p></div>
+            <div class="footer-section"><h5>Navigation</h5><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="formations.html">Formations</a></li></ul></div>
+            <div class="footer-section"><h5>Parcours</h5><ul><li><a href="parcours.html">Diagnostic</a></li><li><a href="formations.html">Parcours Heros</a></li></ul></div>
+            <div class="footer-section"><h5>Contact</h5><ul><li>Route du Grand clos 46</li><li>1871 Choex</li><li>076 490 23 12</li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <p>2025 Patrick Beiner. Tous droits reserves.</p>
+            <p><a href="mentions-legales.html" style="color: rgba(255,255,255,0.6); text-decoration: underline;">Mentions legales</a> | <a href="politique-confidentialite.html" style="color: rgba(255,255,255,0.6); text-decoration: underline;">Politique de confidentialite</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Afficher les messages de succes/erreur
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const messageDiv = document.getElementById('form-message');
+
+            if (urlParams.get('success') === '1') {
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#d4edda';
+                messageDiv.style.color = '#155724';
+                messageDiv.style.border = '1px solid #c3e6cb';
+                messageDiv.textContent = 'Merci pour votre message ! Je vous repondrai dans les plus brefs delais.';
+            } else if (urlParams.get('error') === '1') {
+                messageDiv.style.display = 'block';
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                const errorMsg = urlParams.get('msg') || 'Une erreur est survenue. Veuillez reessayer.';
+                messageDiv.textContent = decodeURIComponent(errorMsg);
+            }
+        });
+    </script>
+</body>
+</html>
